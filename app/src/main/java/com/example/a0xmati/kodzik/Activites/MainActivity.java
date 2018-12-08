@@ -1,4 +1,4 @@
-package com.example.a0xmati.kodzik;
+package com.example.a0xmati.kodzik.Activites;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,10 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
+
+import com.example.a0xmati.kodzik.R;
+import com.example.a0xmati.kodzik.SQLiteHelpers.FavouriteDatabaseHelper;
+import com.example.a0xmati.kodzik.SQLiteHelpers.LocalDatabaseHelper;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -40,6 +44,10 @@ public class MainActivity extends AppCompatActivity {
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        LocalDatabaseHelper localDatabaseHelper = new LocalDatabaseHelper(this, null, null, 1);
+        FavouriteDatabaseHelper favouriteDatabaseHelper = new FavouriteDatabaseHelper(this, null, null, 1);
+
     }
 
 }

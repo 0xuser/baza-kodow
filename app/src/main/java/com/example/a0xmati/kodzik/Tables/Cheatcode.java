@@ -1,5 +1,7 @@
 package com.example.a0xmati.kodzik.Tables;
 
+import android.database.sqlite.SQLiteDatabase;
+
 public class Cheatcode {
     public static final String TABLE_NAME = "gra";
     public static final String ID_COLUMN = "id_kod";
@@ -56,6 +58,23 @@ public class Cheatcode {
 
     public void setDesc(String desc) {
         this.desc = desc;
+    }
+
+    public static void onCreate(SQLiteDatabase db) {
+        db.execSQL("CREATE TABLE "
+                + TABLE_NAME + "("
+                + ID_COLUMN + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + ID_GAME_COLUMN + " INTEGER, "
+                + ID_PLATFORM_COLUMN + " INTEGER, "
+                + CHEATCODE_COLUMN + " TEXT,"
+                + DESCRIPTION_COLUMN + " TEXT, "
+                + "CONSTRAINT FK_Game FOREIGN KEY (" + ID_GAME_COLUMN + ") REFERENCES " + Game.TABLE_NAME + "(" + Game.ID_COLUMN + ") ON DELETE CASCADE,"
+                + "CONSTRAINT FK_Platform FOREIGN KEY (" + ID_PLATFORM_COLUMN + ") REFERENCES " + Platform.TABLE_NAME + "(" + Platform.ID_COLUMN + ") ON DELETE CASCADE)");
+
+    }
+
+    public static void onUpgrade(SQLiteDatabase db) {
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
     }
 }
 

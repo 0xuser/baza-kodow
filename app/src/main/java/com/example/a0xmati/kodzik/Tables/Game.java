@@ -1,5 +1,7 @@
 package com.example.a0xmati.kodzik.Tables;
 
+import android.database.sqlite.SQLiteDatabase;
+
 public class Game {
     public static final String TABLE_NAME = "gra";
     public static final String ID_COLUMN = "id_gra";
@@ -83,5 +85,23 @@ public class Game {
     @Override
     public String toString() {
         return getName();
+    }
+
+    public static void onCreate(SQLiteDatabase db) {
+        db.execSQL("CREATE TABLE "
+                + TABLE_NAME + "("
+                + ID_COLUMN + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + NAME_COLUMN + " TEXT, "
+                + PRODUCER_COLUMN + " TEXT, "
+                + RELEASE_DATE_COLUMN + " TEXT, "
+                + ID_GENRE_COLUMN + "INTEGER, "
+                + DESCRIPTION_COLUMN + " TEXT,"
+                + IMAGE_COLUMN + " TEXT, "
+                + "CONSTRAINT FK_Genre FOREIGN KEY (" + ID_GENRE_COLUMN + ") REFERENCES " + Genre.TABLE_NAME + "(" + Genre.ID_COLUMN + ") ON DELETE CASCADE)");
+
+    }
+
+    public static void onUpgrade(SQLiteDatabase db) {
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
     }
 }

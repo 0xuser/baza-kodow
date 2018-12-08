@@ -1,4 +1,4 @@
-package com.example.a0xmati.kodzik;
+package com.example.a0xmati.kodzik.Activites;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -6,6 +6,8 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+
+import com.example.a0xmati.kodzik.R;
 
 public class GameActivity extends AppCompatActivity {
 

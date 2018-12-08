@@ -1,5 +1,7 @@
 package com.example.a0xmati.kodzik.Tables;
 
+import android.database.sqlite.SQLiteDatabase;
+
 public class Platform {
     public static final String TABLE_NAME = "platforma";
     public static final String ID_COLUMN = "id_platforma";
@@ -39,6 +41,19 @@ public class Platform {
     @Override
     public String toString() {
         return getShortname();
+    }
+
+
+    public static void onCreate(SQLiteDatabase db) {
+        db.execSQL("CREATE TABLE "
+                + TABLE_NAME + "("
+                + ID_COLUMN + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + NAME_COLUMN + "TEXT,"
+                + SHORTNAME_COLUMN + " TEXT)");
+    }
+
+    public static void onUpgrade(SQLiteDatabase db) {
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
     }
 
 
