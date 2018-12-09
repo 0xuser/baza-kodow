@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        LocalDatabaseHelper localDatabaseHelper = new LocalDatabaseHelper(this, null, null, 1);
+        LocalDatabaseHelper localDatabaseHelper = new LocalDatabaseHelper(this, null, null, 2);
         FavouriteDatabaseHelper favouriteDatabaseHelper = new FavouriteDatabaseHelper(this, null, null, 1);
 
     }

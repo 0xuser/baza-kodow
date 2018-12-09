@@ -88,13 +88,13 @@ public class Game {
     }
 
     public static void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE "
+        db.execSQL("CREATE TABLE IF NOT EXISTS "
                 + TABLE_NAME + "("
                 + ID_COLUMN + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + NAME_COLUMN + " TEXT, "
                 + PRODUCER_COLUMN + " TEXT, "
                 + RELEASE_DATE_COLUMN + " TEXT, "
-                + ID_GENRE_COLUMN + "INTEGER, "
+                + ID_GENRE_COLUMN + " INTEGER, "
                 + DESCRIPTION_COLUMN + " TEXT,"
                 + IMAGE_COLUMN + " TEXT, "
                 + "CONSTRAINT FK_Genre FOREIGN KEY (" + ID_GENRE_COLUMN + ") REFERENCES " + Genre.TABLE_NAME + "(" + Genre.ID_COLUMN + ") ON DELETE CASCADE)");

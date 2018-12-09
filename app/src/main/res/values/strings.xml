@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">Baza Kodów</string>
+    <string name="app_name">Kodzik</string>
     <string name="title_home">Przeglądaj</string>
     <string name="title_dashboard">Ulubione</string>
     <string name="title_notifications">Ustawienia</string>
-    <string name="title_activity_game">game</string>
+    <string name="title_activity_game">Gra</string>
 </resources>

@@ -34,7 +34,7 @@ public class Genre {
     }
 
     public static void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE "
+        db.execSQL("CREATE TABLE IF NOT EXISTS "
                 + TABLE_NAME + "("
                 + ID_COLUMN + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + NAME_COLUMN + " TEXT)");

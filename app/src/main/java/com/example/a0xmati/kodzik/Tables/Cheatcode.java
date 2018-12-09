@@ -3,7 +3,7 @@ package com.example.a0xmati.kodzik.Tables;
 import android.database.sqlite.SQLiteDatabase;
 
 public class Cheatcode {
-    public static final String TABLE_NAME = "gra";
+    public static final String TABLE_NAME = "kod";
     public static final String ID_COLUMN = "id_kod";
     public static final String ID_GAME_COLUMN = "id_gra";
     public static final String ID_PLATFORM_COLUMN = "id_platforma";
@@ -61,7 +61,7 @@ public class Cheatcode {
     }
 
     public static void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE "
+        db.execSQL("CREATE TABLE IF NOT EXISTS "
                 + TABLE_NAME + "("
                 + ID_COLUMN + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + ID_GAME_COLUMN + " INTEGER, "
