@@ -1,5 +1,6 @@
 package com.example.a0xmati.kodzik.DAO;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -55,9 +56,21 @@ public class GameDAO implements IGameDAO {
         return null;
     }
 
+
+
     @Override
     public int insert(SQLiteDatabase db, Game game) {
-        return 0;
+        ContentValues values = new ContentValues();
+
+        values.put(Game.NAME_COLUMN, game.getName());
+        values.put(Game.PRODUCER_COLUMN, game.getProducer());
+        values.put(Game.RELEASE_DATE_COLUMN, game.getRelease_date());
+        values.put(Game.ID_GENRE_COLUMN, game.getId_genre());
+        values.put(Game.DESCRIPTION_COLUMN, game.getDesc());
+        values.put(Game.IMAGE_COLUMN, game.getImg());
+
+        return (int) db.insert(this.tableName, null, values);
+
     }
 
     @Override

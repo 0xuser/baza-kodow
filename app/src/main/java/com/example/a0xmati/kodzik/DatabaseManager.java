@@ -61,6 +61,17 @@ public class DatabaseManager {
         return adapter;
     }
 
+    public GameAdapter viewFavorites(Context context) {
+        ArrayList<Game> games = gameDAO.selectAll(favouriteDatabaseHelper.getDb());
+        GameAdapter adapter = new GameAdapter(context, games);
+        return adapter;
+    }
+
+    public void reloadFavorites(Context context, ListView listView) {
+        listView.setAdapter(null);
+        listView.setAdapter(this.viewFavorites(context));
+    }
+
     public CheatcodeAdapter viewCheatcodes(Context context, int id, int plat) {
         ArrayList<Cheatcode> cheats = cheatcodeDAO.selectAll(localDatabaseHelper.getDb(), id, plat);
         CheatcodeAdapter adapter = new CheatcodeAdapter(context, cheats);
@@ -77,5 +88,8 @@ public class DatabaseManager {
         listView.setAdapter(this.viewCheatcodes(context, currentID, plat));
     }
 
+    public void addToFav(Game game){
+        gameDAO.insert(favouriteDatabaseHelper.getDb(), game);
+    }
 
 }

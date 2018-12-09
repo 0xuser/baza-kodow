@@ -37,9 +37,15 @@ public class GameAdapter extends ArrayAdapter<Game> {
                 Bundle extras = new Bundle();
                 extras.putInt("ID",game.getId());
                 extras.putString("Name", game.getName());
+                extras.putString("Producer", game.getProducer());
+                extras.putString("release_date", game.getRelease_date());
+                extras.putInt("id_genre", game.getId_genre());
+                extras.putString("Desc", game.getDesc());
                 extras.putString("Img", game.getImg());
                 intent.putExtras(extras);
                 getContext().startActivity(intent);
+
+
             }
         });
 

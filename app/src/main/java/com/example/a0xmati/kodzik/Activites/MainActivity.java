@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private LocalDatabaseHelper localDatabaseHelper;
     private FavouriteDatabaseHelper favouriteDatabaseHelper;
     private DatabaseManager databaseManager;
-    ListView listView;
+    private ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +57,8 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_dashboard:
-
+                    Intent intentf = new Intent(MainActivity.this, FavouritesActivity.class);
+                    startActivity(intentf);
                     return true;
                 case R.id.navigation_notifications:
                     Intent intent = new Intent(MainActivity.this, SettingsActivity.class);

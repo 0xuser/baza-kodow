@@ -23,6 +23,7 @@ import com.example.a0xmati.kodzik.Fragments.PCFragment;
 import com.example.a0xmati.kodzik.Fragments.PS4Fragment;
 import com.example.a0xmati.kodzik.Fragments.XBOXFragment;
 import com.example.a0xmati.kodzik.R;
+import com.example.a0xmati.kodzik.Tables.Game;
 
 import java.io.InputStream;
 import java.net.URL;
@@ -32,7 +33,7 @@ public class GameActivity extends AppCompatActivity {
     private DatabaseManager databaseManager;
     private ListView pclist, ps4list, xboxlist;
     int id;
-
+    private Game game;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,21 +44,31 @@ public class GameActivity extends AppCompatActivity {
 
         databaseManager = DatabaseManager.getInstance();
 
+
+
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
+
+        id = extras.getInt("ID");
+        String game_name = extras.getString("Name");
+        String prod = extras.getString("Producer");
+        String date = extras.getString("release_date");
+        int id_genre = extras.getInt("id_genre");
+        String desc = extras.getString("Desc");
+        String img = extras.getString("Img");
+
+        game = new Game(id, game_name, prod, date, id_genre, desc, img);
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Game added to favourites", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-                //TODO: DatabaseManager -> insert this game into favourite database
+                databaseManager.addToFav(game);
             }
         });
 
-        Intent intent = getIntent();
-        Bundle extras = intent.getExtras();
-        id = extras.getInt("ID");
-        String game_name = extras.getString("Name");
-        String img = extras.getString("Img");
         setTitle(game_name);
         ImageView iv = findViewById(R.id.imageViewGame);
         new DownLoadImageTask(iv).execute(img);
@@ -68,8 +79,6 @@ public class GameActivity extends AppCompatActivity {
         FragmentTransaction ft = fm.beginTransaction();
         ft.replace(R.id.fragment_place, frag);
         ft.commit();
-
-
 
 
     }
