@@ -6,15 +6,23 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.a0xmati.kodzik.DatabaseManager;
 import com.example.a0xmati.kodzik.R;
 import com.example.a0xmati.kodzik.SQLiteHelpers.FavouriteDatabaseHelper;
 import com.example.a0xmati.kodzik.SQLiteHelpers.LocalDatabaseHelper;
 
+import java.nio.file.Files;
+
 public class MainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
+    private LocalDatabaseHelper localDatabaseHelper;
+    private FavouriteDatabaseHelper favouriteDatabaseHelper;
+    private DatabaseManager databaseManager;
+    ListView listView;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -40,14 +48,28 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        listView = findViewById(R.id.games_list);
 
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        databaseManager = DatabaseManager.getInstance();
+        localDatabaseHelper = new LocalDatabaseHelper(this, null, null, 2);
+        favouriteDatabaseHelper = new FavouriteDatabaseHelper(this, null, null, 1);
 
-        LocalDatabaseHelper localDatabaseHelper = new LocalDatabaseHelper(this, null, null, 2);
-        FavouriteDatabaseHelper favouriteDatabaseHelper = new FavouriteDatabaseHelper(this, null, null, 1);
+        databaseManager.setMainDb(localDatabaseHelper);
+        databaseManager.setMainListView(listView);
+        databaseManager.setMainContext(this);
+
+        databaseManager.setFavDb(favouriteDatabaseHelper);
+
+
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        databaseManager.reloadGames(this, listView);
+    }
 }
