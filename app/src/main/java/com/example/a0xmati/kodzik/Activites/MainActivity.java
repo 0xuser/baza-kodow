@@ -14,8 +14,6 @@ import com.example.a0xmati.kodzik.R;
 import com.example.a0xmati.kodzik.SQLiteHelpers.FavouriteDatabaseHelper;
 import com.example.a0xmati.kodzik.SQLiteHelpers.LocalDatabaseHelper;
 
-import java.nio.file.Files;
-
 public class MainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
@@ -23,26 +21,6 @@ public class MainActivity extends AppCompatActivity {
     private FavouriteDatabaseHelper favouriteDatabaseHelper;
     private DatabaseManager databaseManager;
     ListView listView;
-
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
-                    return true;
-                case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_dashboard);
-                    return true;
-                case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications);
-                    return true;
-            }
-            return false;
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
         databaseManager.setFavDb(favouriteDatabaseHelper);
 
 
-
     }
 
     @Override
@@ -72,4 +49,25 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         databaseManager.reloadGames(this, listView);
     }
+
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.navigation_home:
+                    mTextMessage.setText(R.string.title_home);
+                    return true;
+                case R.id.navigation_dashboard:
+                    mTextMessage.setText(R.string.title_dashboard);
+                    return true;
+                case R.id.navigation_notifications:
+                    Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+                    startActivity(intent);
+                    return true;
+            }
+            return false;
+        }
+    };
 }
