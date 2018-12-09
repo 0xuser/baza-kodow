@@ -3,11 +3,13 @@ package com.example.a0xmati.kodzik;
 import android.content.Context;
 import android.widget.ListView;
 
+import com.example.a0xmati.kodzik.Adapters.CheatcodeAdapter;
 import com.example.a0xmati.kodzik.Adapters.GameAdapter;
 import com.example.a0xmati.kodzik.DAO.CheatcodeDAO;
 import com.example.a0xmati.kodzik.DAO.GameDAO;
 import com.example.a0xmati.kodzik.SQLiteHelpers.FavouriteDatabaseHelper;
 import com.example.a0xmati.kodzik.SQLiteHelpers.LocalDatabaseHelper;
+import com.example.a0xmati.kodzik.Tables.Cheatcode;
 import com.example.a0xmati.kodzik.Tables.Game;
 
 import java.util.ArrayList;
@@ -21,6 +23,7 @@ public class DatabaseManager {
     private FavouriteDatabaseHelper favouriteDatabaseHelper;
     private GameDAO gameDAO;
     private CheatcodeDAO cheatcodeDAO;
+    private int currentID;
     private DatabaseManager() {
         gameDAO = new GameDAO();
         cheatcodeDAO = new CheatcodeDAO();
@@ -33,7 +36,9 @@ public class DatabaseManager {
         return instance;
     }
 
-
+    public void setCurrentID(int id){
+        this.currentID = id;
+    }
     public void setMainDb(LocalDatabaseHelper localDatabaseHelper) {
         this.localDatabaseHelper = localDatabaseHelper;
     }
@@ -56,9 +61,21 @@ public class DatabaseManager {
         return adapter;
     }
 
-    public void reloadGames(Context mainContext, ListView mainListView) {
-        mainListView.setAdapter(null);
-        mainListView.setAdapter(this.viewAllGames(mainContext));
+    public CheatcodeAdapter viewCheatcodes(Context context, int id, int plat) {
+        ArrayList<Cheatcode> cheats = cheatcodeDAO.selectAll(localDatabaseHelper.getDb(), id, plat);
+        CheatcodeAdapter adapter = new CheatcodeAdapter(context, cheats);
+        return adapter;
     }
+
+    public void reloadGames(Context context, ListView listView) {
+        listView.setAdapter(null);
+        listView.setAdapter(this.viewAllGames(context));
+    }
+
+    public void loadCheat(Context context, ListView listView, int plat) {
+        listView.setAdapter(null);
+        listView.setAdapter(this.viewCheatcodes(context, currentID, plat));
+    }
+
 
 }

@@ -60,6 +60,11 @@ public class Cheatcode {
         this.desc = desc;
     }
 
+    @Override
+    public String toString() {
+        return cheatcode + " " + desc;
+    }
+
     public static void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE IF NOT EXISTS "
                 + TABLE_NAME + "("

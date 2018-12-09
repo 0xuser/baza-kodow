@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">Kodzik</string>
-    <string name="title_home">Przeglądaj</string>
-    <string name="title_dashboard">Ulubione</string>
-    <string name="title_notifications">Ustawienia</string>
+    <string name="title_dashboard">Favourites</string>
+    <string name="title_notifications">Settings</string>
     <string name="title_activity_game">Gra</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
