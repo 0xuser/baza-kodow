@@ -20,14 +20,15 @@ public class MainActivity extends AppCompatActivity {
     private LocalDatabaseHelper localDatabaseHelper;
     private FavouriteDatabaseHelper favouriteDatabaseHelper;
     private DatabaseManager databaseManager;
-    private ListView listView;
+    private ListView listView, recently;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         listView = findViewById(R.id.games_list);
-
+        recently = findViewById(R.id.recent_title);
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -40,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         databaseManager.setMainContext(this);
 
         databaseManager.setFavDb(favouriteDatabaseHelper);
-
+        databaseManager.setmPreferences(this);
 
     }
 
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         databaseManager.reloadGames(this, listView);
+        databaseManager.loadShared(this,recently);
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener

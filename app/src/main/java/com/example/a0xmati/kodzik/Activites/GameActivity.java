@@ -31,7 +31,6 @@ import java.net.URL;
 public class GameActivity extends AppCompatActivity {
 
     private DatabaseManager databaseManager;
-    private ListView pclist, ps4list, xboxlist;
     int id;
     private Game game;
     @Override

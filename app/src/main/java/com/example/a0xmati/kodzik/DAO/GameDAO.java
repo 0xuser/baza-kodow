@@ -53,7 +53,45 @@ public class GameDAO implements IGameDAO {
 
     @Override
     public Game selectById(SQLiteDatabase db, int id) {
-        return null;
+        String[] selectionArgs = {id + ""};
+        Cursor cursor = db.query(
+                this.tableName,         // The table to query
+                this.projection,        // The array of columns to return (pass null to get all)
+                Game.ID_COLUMN + " = ?",              // The columns for the WHERE clause
+                selectionArgs,          // The values for the WHERE clause
+                null,          // don't group the rows
+                null,           // don't filter by row groups
+                null               // The sort order
+        );
+
+        long itemId = 0;
+        String itemName = "";
+        String itemProducer = "";
+        String itemReleaseDate = "";
+        long itemIdGenre = 0;
+        String itemDesc = "";
+        String itemImg = "";
+
+        while (cursor.moveToNext()) {
+            itemId = cursor.getLong(
+                    cursor.getColumnIndexOrThrow(Game.ID_COLUMN));
+            itemName = cursor.getString(
+                    cursor.getColumnIndexOrThrow(Game.NAME_COLUMN));
+            itemProducer = cursor.getString(
+                    cursor.getColumnIndexOrThrow(Game.PRODUCER_COLUMN));
+            itemReleaseDate = cursor.getString(
+                    cursor.getColumnIndexOrThrow(Game.RELEASE_DATE_COLUMN));
+            itemIdGenre = cursor.getLong(
+                    cursor.getColumnIndexOrThrow(Game.ID_GENRE_COLUMN));
+            itemDesc = cursor.getString(
+                    cursor.getColumnIndexOrThrow(Game.DESCRIPTION_COLUMN));
+            itemImg = cursor.getString(
+                    cursor.getColumnIndexOrThrow(Game.IMAGE_COLUMN));
+        }
+        cursor.close();
+
+        Game game = new Game((int) itemId, itemName, itemProducer, itemReleaseDate, (int) itemIdGenre, itemDesc, itemImg);
+        return game;
     }
 
 

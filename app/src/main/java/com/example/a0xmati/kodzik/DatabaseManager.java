@@ -1,6 +1,8 @@
 package com.example.a0xmati.kodzik;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.widget.ListView;
 
 import com.example.a0xmati.kodzik.Adapters.CheatcodeAdapter;
@@ -24,6 +26,9 @@ public class DatabaseManager {
     private GameDAO gameDAO;
     private CheatcodeDAO cheatcodeDAO;
     private int currentID;
+    private SharedPreferences mPreferences;
+    private SharedPreferences.Editor mEditor;
+
     private DatabaseManager() {
         gameDAO = new GameDAO();
         cheatcodeDAO = new CheatcodeDAO();
@@ -92,4 +97,28 @@ public class DatabaseManager {
         gameDAO.insert(favouriteDatabaseHelper.getDb(), game);
     }
 
+    public void setmPreferences(Context context) {
+        mPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+    }
+
+    public void saveGameToSharedPrefs(Game game){
+        mEditor = mPreferences.edit();
+        mEditor.putInt("key",game.getId());
+        mEditor.commit();
+    }
+
+
+    public GameAdapter viewGameFromSharedPrefs(Context context){
+        int id = mPreferences.getInt("key",0);
+        Game game = gameDAO.selectById(localDatabaseHelper.getDb(), id);
+        ArrayList<Game> games = new ArrayList<Game>();
+        games.add(game);
+        GameAdapter adapter = new GameAdapter(context, games);
+        return adapter;
+    }
+
+    public  void loadShared(Context context, ListView listView){
+        listView.setAdapter(null);
+        listView.setAdapter(this.viewGameFromSharedPrefs(context));
+    }
 }

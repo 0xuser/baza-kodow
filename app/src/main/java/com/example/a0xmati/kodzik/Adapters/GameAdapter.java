@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.example.a0xmati.kodzik.Activites.GameActivity;
+import com.example.a0xmati.kodzik.DatabaseManager;
 import com.example.a0xmati.kodzik.R;
 import com.example.a0xmati.kodzik.Tables.Game;
 
@@ -33,6 +34,8 @@ public class GameAdapter extends ArrayAdapter<Game> {
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                DatabaseManager databaseManager = DatabaseManager.getInstance();
+                databaseManager.saveGameToSharedPrefs(game);
                 Intent intent = new Intent(getContext(), GameActivity.class);
                 Bundle extras = new Bundle();
                 extras.putInt("ID",game.getId());
