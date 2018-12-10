@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="label1">Spielcheats Cheats</string>
+    <string name="label2">Spiel</string>
+    <string name="label3">die Einstellungen</string>
+
+    <string name="app_name">Spielcheats</string>
+    <string name="title_dashboard">Favoriten</string>
+    <string name="title_notifications">die Einstellungen</string>
+    <string name="title_activity_game">Spiel</string>
+    <string name="recentlyopened">Kürzlich eröffnet:</string>
+    <string name="recentlyEmpty">Leeren</string>
+    <string name="ggames">Spiele:</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hallo leeres Fragment</string>
+</resources>
