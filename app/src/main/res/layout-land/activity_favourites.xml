@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activites.FavouritesActivity">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView6" android:fillViewport="true">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ListView
+                android:id="@+id/fav_list"
+                android:layout_width="582dp"
+                android:layout_height="399dp"
+                android:layout_marginStart="8dp"
+                app:layout_constraintStart_toStartOf="parent" />
+        </LinearLayout>
+    </ScrollView>
+
+
+
+    <!--<ListView-->
+        <!--android:id="@+id/fav_list"-->
+        <!--android:layout_width="582dp"-->
+        <!--android:layout_height="399dp"-->
+        <!--android:layout_marginStart="8dp"-->
+        <!--app:layout_constraintStart_toStartOf="parent" />-->
+
+</android.support.constraint.ConstraintLayout>

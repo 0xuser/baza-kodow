@@ -5,9 +5,11 @@
 
     <TextView
         android:id="@+id/cheatitem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:text="Kod" />
+        android:layout_width="387dp"
+        android:layout_height="35dp"
+        android:text="Kod"
+        android:textAlignment="center"
+        android:padding="7dp"
+        />
 
 </android.support.constraint.ConstraintLayout>

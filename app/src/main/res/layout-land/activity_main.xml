@@ -34,7 +34,7 @@
     </SearchView>
 
     <ScrollView
-        android:layout_width="368dp"
+        android:layout_width="595dp"
         android:layout_height="399dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -44,7 +44,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
         </LinearLayout>
     </ScrollView>
@@ -68,7 +68,7 @@
 
     <ListView
         android:id="@+id/games_list"
-        android:layout_width="match_parent"
+        android:layout_width="636dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"

@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".Activites.MainActivity"
-            android:label="Kodzik">
+            android:label="@string/label1">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,11 +22,11 @@
         </activity>
         <activity
             android:name=".Activites.GameActivity"
-            android:label="Game"
+            android:label="@string/label2"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activites.SettingsActivity"
-            android:label="Settings" />
+            android:label="@string/label3" />
         <activity android:name=".Activites.FavouritesActivity"></activity>
     </application>
 
