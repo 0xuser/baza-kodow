@@ -19,8 +19,8 @@ import java.util.ArrayList;
 public class DatabaseManager {
 
     private static DatabaseManager instance;
-    private ListView mainListView;
-    private Context mainContext;
+    private ListView favListView;
+    private Context favContext;
     private LocalDatabaseHelper localDatabaseHelper;
     private FavouriteDatabaseHelper favouriteDatabaseHelper;
     private GameDAO gameDAO;
@@ -41,6 +41,14 @@ public class DatabaseManager {
         return instance;
     }
 
+    public void setFavListView(ListView favListView) {
+        this.favListView = favListView;
+    }
+
+    public void setFavContext(Context favContext) {
+        this.favContext = favContext;
+    }
+
     public void setCurrentID(int id){
         this.currentID = id;
     }
@@ -52,13 +60,6 @@ public class DatabaseManager {
         this.favouriteDatabaseHelper = favouriteDatabaseHelper;
     }
 
-    public void setMainContext(Context context) {
-        this.mainContext = context;
-    }
-
-    public void setMainListView(ListView listView) {
-        this.mainListView = listView;
-    }
 
     public GameAdapter viewAllGames(Context context) {
         ArrayList<Game> games = gameDAO.selectAll(localDatabaseHelper.getDb());
@@ -120,5 +121,22 @@ public class DatabaseManager {
     public  void loadShared(Context context, ListView listView){
         listView.setAdapter(null);
         listView.setAdapter(this.viewGameFromSharedPrefs(context));
+    }
+
+    public void removeFromFav(Game game){
+        gameDAO.delete(favouriteDatabaseHelper.getDb(), game);
+        reloadFavorites(favContext,favListView);
+    }
+
+    public GameAdapter viewFilterGames(Context context, String name){
+        Game game = gameDAO.selectByName(localDatabaseHelper.getDb(), name);
+        ArrayList<Game> games = new ArrayList<Game>();
+        GameAdapter adapter = new GameAdapter(context, games);
+        games.add(game);
+        return adapter;
+    }
+    public void reloadGamesFilter(Context context, ListView listView, String name){
+        listView.setAdapter(null);
+        listView.setAdapter(this.viewFilterGames(context, name));
     }
 }

@@ -7,7 +7,9 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.a0xmati.kodzik.DatabaseManager;
 import com.example.a0xmati.kodzik.R;
@@ -21,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private FavouriteDatabaseHelper favouriteDatabaseHelper;
     private DatabaseManager databaseManager;
     private ListView listView, recently;
-
+    private SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         listView = findViewById(R.id.games_list);
         recently = findViewById(R.id.recent_title);
+        searchView = findViewById(R.id.searchView);
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -37,12 +40,27 @@ public class MainActivity extends AppCompatActivity {
         favouriteDatabaseHelper = new FavouriteDatabaseHelper(this, null, null, 1);
 
         databaseManager.setMainDb(localDatabaseHelper);
-        databaseManager.setMainListView(listView);
-        databaseManager.setMainContext(this);
+
 
         databaseManager.setFavDb(favouriteDatabaseHelper);
         databaseManager.setmPreferences(this);
 
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                // your text view here
+                //Toast.makeText(MainActivity.this, newText, Toast.LENGTH_LONG).show();
+                databaseManager.reloadGames(MainActivity.this,listView);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                databaseManager.reloadGamesFilter(MainActivity.this,listView, query);
+
+                return true;
+            }
+        });
     }
 
     @Override
@@ -70,4 +88,6 @@ public class MainActivity extends AppCompatActivity {
             return false;
         }
     };
+
+
 }

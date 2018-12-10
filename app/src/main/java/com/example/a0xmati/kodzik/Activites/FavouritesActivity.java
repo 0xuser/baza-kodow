@@ -18,6 +18,8 @@ public class FavouritesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_favourites);
         listView = findViewById(R.id.fav_list);
         databaseManager = DatabaseManager.getInstance();
+        databaseManager.setFavContext(this);
+        databaseManager.setFavListView(listView);
     }
 
     @Override

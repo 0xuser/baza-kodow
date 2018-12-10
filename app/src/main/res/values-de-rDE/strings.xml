@@ -12,6 +12,4 @@
     <string name="recentlyopened">Kürzlich eröffnet:</string>
     <string name="recentlyEmpty">Leeren</string>
     <string name="ggames">Spiele:</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hallo leeres Fragment</string>
 </resources>
